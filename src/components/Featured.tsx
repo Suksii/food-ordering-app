@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Image from"next/image";
 
@@ -15,7 +17,7 @@ const Featured = () => {
 
      return (
          <>
-             <h1 className="text-4xl font-bold text-center py-10">Check out our featured products</h1>
+            <h1 className="text-4xl font-bold text-center py-10">Check out our featured products</h1>
             <div className="w-full md:w-[80%] mx-auto overflow-x-scroll py-10 scroll">
                 <div className="w-max flex space-x-4">
                 {products.map((product, index) => (
