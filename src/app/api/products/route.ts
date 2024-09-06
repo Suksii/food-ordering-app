@@ -6,7 +6,11 @@ export const GET = async (req:NextRequest) => {
     const {searchParams} = new URL(req.url);
     const category = searchParams.get("category");
     try {
-        const products = await prisma.product.findMany();
+        const products = await prisma.product.findMany({
+            where: {
+                ...category ? {category: {slug: category}} : { isFeatured: true }
+            }
+        });
         return new NextResponse(
             JSON.stringify(products),
             {status: 200}
