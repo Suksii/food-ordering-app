@@ -1,12 +1,14 @@
-import {NextResponse} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import {prisma} from "@/utils/connection";
 
 
-export const GET = async () => {
+export const GET = async (req:NextRequest) => {
+    const {searchParams} = new URL(req.url);
+    const category = searchParams.get("category");
     try {
-        const categories = await prisma.category.findMany();
+        const products = await prisma.product.findMany();
         return new NextResponse(
-            JSON.stringify(categories),
+            JSON.stringify(products),
             {status: 200}
         );
     } catch (err) {
