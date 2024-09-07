@@ -1,7 +1,18 @@
+"use client"
+
 import React from 'react';
 import Image from "next/image";
+import { useSession, signIn } from "next-auth/react"
 
 const LoginPage = () => {
+
+    const {data, status} = useSession()
+
+    console.log("data:", data);
+    console.log("status", status);
+
+
+
     return (
         <div className="flex h-screen items-center justify-center">
             <div className="h-screen w-full md:h-1/2 lg:w-2/3 xl:w-1/2 flex flex-col md:flex-row shadow-md">
@@ -15,7 +26,7 @@ const LoginPage = () => {
                         <p className="text-gray-500 py-4">Login using your google or facebook account</p>
                     </div>
                     <div className="flex flex-col space-y-4">
-                        <button className="flex items-center shadow-sm shadow-black text-xl font-bold px-4 py-2 duration-300 hover:bg-gray-800 hover:text-gray-100">
+                        <button className="flex items-center shadow-sm shadow-black text-xl font-bold px-4 py-2 duration-300 hover:bg-gray-800 hover:text-gray-100" onClick={() => signIn("google")}>
                             <Image src={"/googleLogo.svg"} alt={"Google"} width={20} height={20} className="mr-2"/>
                             <span>Login with Google</span>
                         </button>
