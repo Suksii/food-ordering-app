@@ -58,7 +58,9 @@ const Navbar = () => {
                         {/* <Link href={"/login"} className="w-full text-center" onClick={() => setIsOpened(false)}>
                             <p className="text-xl uppercase font-semibold py-6 w-full hover:bg-gray-800 hover:text-white cursor-pointer duration-300">Login</p>
                         </Link> */}
-                        <UserLinksMobile onClick={() => setIsOpened(false)}/>
+                        <div onClick={() => setIsOpened(false)} className="w-full">
+                            <UserLinksMobile/>
+                        </div>
                     </div>
                 </div>
             </nav>

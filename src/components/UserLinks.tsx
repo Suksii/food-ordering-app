@@ -22,16 +22,16 @@ export const UserLinks = () => {
     )
 }
 
-export const UserLinksMobile = ({onClick}:any) => {
+export const UserLinksMobile = () => {
     
     const { status } = useSession()
 
     return (
         <div className="w-full flex justify-center items-center">
             {status === "unauthenticated" ? (
-                <Link className="text-xl uppercase font-semibold py-6 w-full text-center hover:bg-gray-800 hover:text-white cursor-pointer duration-300" href="/login" onClick={onClick}>Login</Link>
+                <Link className="text-xl uppercase font-semibold py-6 w-full text-center hover:bg-gray-800 hover:text-white cursor-pointer duration-300" href="/login">Login</Link>
             ) : (
-                <div className="w-full flex flex-col items-center justify-center text-center" onClick={onClick}>
+                <div className="w-full flex flex-col items-center justify-center text-center">
                     <Link href="/orders" className="text-xl py-6 w-full hover:bg-gray-800 hover:text-white cursor-pointer duration-300">Orders</Link>
                     <span className="text-xl uppercase font-semibold py-6 w-full hover:bg-gray-800 hover:text-white cursor-pointer duration-300" onClick={() => signOut()}>Logout</span>
                 </div>
