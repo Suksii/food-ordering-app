@@ -2,16 +2,20 @@
 
 import React from 'react';
 import Image from "next/image";
+import { useRouter } from "next/navigation"
 import { useSession, signIn } from "next-auth/react"
 
 const LoginPage = () => {
 
     const {data, status} = useSession()
-
-    console.log("data:", data);
-    console.log("status", status);
+    const router = useRouter()
 
 
+    if(status === "loading")
+        return <p>Loading...</p>
+
+    if(status === "authenticated")
+        router.push("/")
 
     return (
         <div className="flex h-screen items-center justify-center">

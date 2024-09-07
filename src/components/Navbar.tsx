@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import Hamburger  from 'hamburger-react';
 import Link from "next/link";
 import CartIcon from "@/components/CartIcon";
+import { UserLinksMobile, UserLinks } from './UserLinks';
 
 const Navbar = () => {
 
@@ -27,9 +28,7 @@ const Navbar = () => {
                                     <p>{menu.name}</p>
                                 </Link>
                             ))}
-                            <Link href={"/login"} className="bg-gray-800 text-gray-100 text-xl px-4 py-2 uppercase hover:bg-gray-700 duration-300">
-                                <p>Login</p>
-                            </Link>
+                            <UserLinks />
                             <CartIcon />
                         </div>
                     </div>
@@ -56,9 +55,10 @@ const Navbar = () => {
                         <div className={`w-full flex justify-center items-center hover:bg-gray-800 hover:text-white py-4 duration-300 cursor-pointer`} onClick={() => setIsOpened(false)}>
                             <CartIcon />
                         </div>
-                        <Link href={"/login"} className="w-full text-center" onClick={() => setIsOpened(false)}>
+                        {/* <Link href={"/login"} className="w-full text-center" onClick={() => setIsOpened(false)}>
                             <p className="text-xl uppercase font-semibold py-6 w-full hover:bg-gray-800 hover:text-white cursor-pointer duration-300">Login</p>
-                        </Link>
+                        </Link> */}
+                        <UserLinksMobile onClick={() => setIsOpened(false)}/>
                     </div>
                 </div>
             </nav>
