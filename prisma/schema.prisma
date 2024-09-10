@@ -52,6 +52,7 @@ model User {
   isAdmin       Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
+  orders        Order[]
 
   @@map("users")
 }
@@ -95,4 +96,6 @@ model Order {
   products    Json[]
   status      String
   intentId    String? @unique
+  user    User  @relation(fields: [userEmail], references: [email])
+  userEmail   String
 }
