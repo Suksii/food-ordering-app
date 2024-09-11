@@ -52,7 +52,17 @@ const  OrdersPage = () => {
                                         <p>{product.name}</p>
                                     ))}
                                 </td>
+                                {session?.user.isAdmin ? (
+                                    <td>
+                                        <form className="flex items-center justify-center">
+                                            <input placeholder={item.status} className="flex items-center shadow-sm shadow-black text-xl font-bold px-2 py-2 duration-300"/> 
+                                            <button className="bg-gray-800 text-gray-100 text-xl px-4 py-2 uppercase hover:bg-gray-700 duration-300">Save</button>
+                                        </form>
+                                    </td>
+                                    ) : (
                                 <td className="py-6 px-2">{item.status}</td>
+                                    )
+                                }
                             </tr>
                         ))}
                     </tbody>
