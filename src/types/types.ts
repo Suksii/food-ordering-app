@@ -22,8 +22,8 @@ export type Product = {
 export type Order = {
     id: string;
     userEmail: string;
-    price: number;
-    products: object[];
+    total: number;
+    products: Product[];
     status: string;
     createdAt: Date;
     intent_id?: String;
