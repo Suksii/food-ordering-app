@@ -9,7 +9,7 @@ type Props = {
 }
 
 const QueryProvider = ({children}:Props) => {
-    return <QueryClientProvider client={queryClient}></QueryClientProvider>
+    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 }
 
-export default QueryClientProvider;
+export default QueryProvider;

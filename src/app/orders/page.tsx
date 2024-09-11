@@ -1,33 +1,30 @@
 "use client"
 
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { Order } from '@/types/types';
+import { useSession } from "next-auth/react"
+import { useRouter } from 'next/navigation';
 
 const  OrdersPage = () => {
 
-    type Order = {
-        id: number;
-        customer: string;
-        price: number;
-        product: string;
-        status: string;
-    }[]
+    const { data:session, status } = useSession()
 
-    const orders: Order = [
-        {
-            id: 1,
-            customer: "John Doe",
-            price: 10.00,
-            product: "Shrimp",
-            status: "Delivered"
-        },
-        {
-            id: 2,
-            customer: "Jane Doe",
-            price: 15.00,
-            product: "Fish",
-            status: "Delivered"
-        }
-    ]
+    const router = useRouter()
+
+    if(status === "unauthenticated")
+        router.push("/")
+    
+
+    const { isLoading, error, data } = useQuery({
+        queryKey: ['orders'],
+        queryFn: () => fetch('http://localhost:3000/api/orders').then(response => response.json())
+    })
+
+    if( isLoading || status === "loading") return "Loading..."
+
+    console.log(data);
+    
 
     return (
         <div className="flex min-h-screen justify-center items-center">
@@ -43,13 +40,17 @@ const  OrdersPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map((order, index) => (
-                            <tr key={index} className="text-left odd:bg-gray-100">
-                                <td className="hidden md:block py-6 px-2">{order.id}</td>
-                                <td className="py-6 px-2">{order.customer}</td>
-                                <td className="py-6 px-2">{order.price}</td>
-                                <td className="hidden md:block py-6 px-2">{order.product}</td>
-                                <td className="py-6 px-2">{order.status}</td>
+                        {data.map((item: Order) => (
+                            <tr key={item.id} className="text-left odd:bg-gray-100">
+                                <td className="hidden md:block py-6 px-2">{item.id}</td>
+                                <td className="py-6 px-2">{item.userEmail}</td>
+                                <td className="py-6 px-2">{item.total} euros</td>
+                                <td className="hidden md:block py-6 px-2">
+                                    {item.products.map(product => (
+                                        <p>{product.name}</p>
+                                    ))}
+                                </td>
+                                <td className="py-6 px-2">{item.status}</td>
                             </tr>
                         ))}
                     </tbody>

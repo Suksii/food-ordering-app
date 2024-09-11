@@ -16,3 +16,15 @@ export type Product = {
     image?: string;
     options?: {title: string, additionalPrice: number}[]
 }
+
+
+
+export type Order = {
+    id: string;
+    userEmail: string;
+    price: number;
+    products: object[];
+    status: string;
+    createdAt: Date;
+    intent_id?: String;
+}
