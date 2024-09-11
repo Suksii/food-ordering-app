@@ -1,5 +1,5 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { NextAuthOptions, getServerSession } from "next-auth";
+import { NextAuthOptions, getServerSession, User } from "next-auth";
 import Google from "next-auth/providers/google"
 import { prisma } from "./connection";
 
@@ -30,16 +30,18 @@ export const authOptions:NextAuthOptions = {
   callbacks: {
     async session({token, session}) {
       if(token) {
-      session.user.isAdmin = token.isAdmin
+      session.user.isAdmin = token.isAdmin;
       }
+      return session;
     },
     async jwt({token}) {
-      const userInDd = await prisma.user.findUnique({
+      const userInDb = await prisma.user.findUnique({
         where:{
           email: token.email!,
         },
       })
-      token.isAdmin = userInDd?.isAdmin!;
+      token.isAdmin = userInDb?.isAdmin!;
+      return token
     }
   }
 }
