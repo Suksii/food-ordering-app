@@ -1,7 +1,7 @@
 'use client'
 
-import React, {useState} from 'react';
-import Hamburger  from 'hamburger-react';
+import React, { useState } from 'react';
+import Hamburger from 'hamburger-react';
 import Link from "next/link";
 import CartIcon from "@/components/CartIcon";
 import { UserLinksMobile, UserLinks } from './UserLinks';
@@ -40,15 +40,15 @@ const Navbar = () => {
                         <div className="z-50">
                             <h1 className="text-2xl text-black font-bold">Logo</h1>
                         </div>
-                            <div className="z-20 text-black">
-                                <Hamburger size={26} toggled={isOpened} toggle={setIsOpened}/>
-                            </div>
+                        <div className="z-20 text-black">
+                            <Hamburger size={26} toggled={isOpened} toggle={setIsOpened} />
                         </div>
+                    </div>
                 </div>
                 <div className={`absolute md:hidden  w-full bg-white shadow py-2 px-2 ${isOpened ? 'translate-y-0 opacity-100' : '-translate-y-[80vh] opacity-0'} duration-300`}>
                     <div className="flex flex-col items-center justify-center z-10">
                         {navMenu.map((menu, index) => (
-                            <Link href={menu.href} key={index}  className="w-full text-center" onClick={() => setIsOpened(false)}>
+                            <Link href={menu.href} key={index} className="w-full text-center" onClick={() => setIsOpened(false)}>
                                 <p className="text-xl py-6 w-full hover:bg-gray-800 hover:text-white cursor-pointer duration-300">{menu.name}</p>
                             </Link>
                         ))}
@@ -59,7 +59,7 @@ const Navbar = () => {
                             <p className="text-xl uppercase font-semibold py-6 w-full hover:bg-gray-800 hover:text-white cursor-pointer duration-300">Login</p>
                         </Link> */}
                         <div onClick={() => setIsOpened(false)} className="w-full">
-                            <UserLinksMobile/>
+                            <UserLinksMobile />
                         </div>
                     </div>
                 </div>

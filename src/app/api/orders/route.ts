@@ -1,15 +1,15 @@
-import {NextRequest, NextResponse} from "next/server";
-import {prisma} from "@/utils/connection";
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/utils/connection";
 import { getAuthSession } from "@/utils/auth";
 
 
 export const GET = async (req: NextRequest) => {
-    
+
     const session = await getAuthSession()
 
-    if(session) {
+    if (session) {
         try {
-            if(session.user.isAdmin) {
+            if (session.user.isAdmin) {
                 const orders = await prisma.order.findMany()
                 return new NextResponse(JSON.stringify(orders), { status: 200 })
             }
@@ -19,18 +19,18 @@ export const GET = async (req: NextRequest) => {
                 }
             })
             console.log("orders:", orders);
-            
-            return new NextResponse(JSON.stringify(orders), { status: 200})
+
+            return new NextResponse(JSON.stringify(orders), { status: 200 })
         } catch (err) {
             return new NextResponse(
-                JSON.stringify({message: "Internal server error"}),
-                {status: 500}
+                JSON.stringify({ message: "Internal server error" }),
+                { status: 500 }
             );
         }
     } else {
         return new NextResponse(
-        JSON.stringify({ message: "You are not authentificated!" }),
-         {status: 401}
-         );
+            JSON.stringify({ message: "You are not authentificated!" }),
+            { status: 401 }
+        );
     }
 }

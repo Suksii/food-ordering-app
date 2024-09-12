@@ -14,7 +14,7 @@ export type Product = {
     description?: string;
     price: number;
     image?: string;
-    options?: {title: string, additionalPrice: number}[]
+    options?: { title: string, additionalPrice: number }[]
 }
 
 
