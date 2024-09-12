@@ -5,6 +5,7 @@ import React from 'react';
 import { Order, Product } from '@/types/types';
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify'
 
 const OrdersPage = () => {
 
@@ -31,10 +32,11 @@ const OrdersPage = () => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(status)
-            })
+            }).then((response) => response.json())
         },
-        onSuccess() {
+        onSuccess(data) {
             queryClient.invalidateQueries({ queryKey: ["orders"] })
+            toast.success(data.message)
         }
     })
 
