@@ -41,26 +41,26 @@ const  OrdersPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item: Order) => (
-                            <tr key={item.id} className="text-left odd:bg-gray-100">
-                                <td className="hidden md:block py-6 px-2">{item.id}</td>
-                                <td className="py-6 px-2">{new Date(item.createdAt).toLocaleDateString('en-GB').replaceAll("/", ".")}</td>
-                                <td className="py-6 px-2">{item.userEmail}</td>
-                                <td className="py-6 px-2">{item.total} euros</td>
+                        {data.map((order: Order) => (
+                            <tr key={order.id} className="text-left odd:bg-gray-100">
+                                <td className="hidden md:block py-6 px-2">{order.id}</td>
+                                <td className="py-6 px-2">{new Date(order.createdAt).toLocaleDateString('en-GB').replaceAll("/", ".")}</td>
+                                <td className="py-6 px-2">{order.userEmail}</td>
+                                <td className="py-6 px-2">{order.total} euros</td>
                                 <td className="hidden md:block py-6 px-2">
-                                    {item.products.map((product: Product) => (
+                                    {order.products.map((product: Product) => (
                                         <p>{product.name}</p>
                                     ))}
                                 </td>
                                 {session?.user.isAdmin ? (
                                     <td>
-                                        <form className="flex items-center justify-center">
-                                            <input placeholder={item.status} className="flex items-center shadow-sm shadow-black text-xl font-bold px-2 py-2 duration-300"/> 
-                                            <button className="bg-gray-800 text-gray-100 text-xl px-4 py-2 uppercase hover:bg-gray-700 duration-300">Save</button>
+                                        <form className="flex flex-col md:flex-row items-center justify-center">
+                                            <input placeholder={order.status} className="flex items-center shadow-sm shadow-black text-xl font-bold px-4 py-2 duration-300 md:w-fit w-full"/> 
+                                            <button className="bg-gray-800 text-gray-100 text-xl px-4 py-2 uppercase hover:bg-gray-700 duration-300 w-full md:w-fit">Save</button>
                                         </form>
                                     </td>
                                     ) : (
-                                <td className="py-6 px-2">{item.status}</td>
+                                <td className="py-6 px-2">{order.status}</td>
                                     )
                                 }
                             </tr>
