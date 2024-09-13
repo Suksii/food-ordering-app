@@ -9,6 +9,8 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
                 id: id,
             },
         })
+        console.log(product);
+        
         return new NextResponse(JSON.stringify(product))
     } catch (error) {
         return new NextResponse(

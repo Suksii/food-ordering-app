@@ -9,12 +9,13 @@ type Category = {
 export type Categories = Category[]
 
 export type Product = {
-    id: number;
+    id: string;
     name: string;
     description?: string;
     price: number;
     image?: string;
-    options?: { title: string, additionalPrice: number }[]
+    categorySlug: string;
+    options?: { name: string, additionalPrice: number }[]
 }
 
 
