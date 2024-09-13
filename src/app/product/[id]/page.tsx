@@ -19,8 +19,8 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
     const singleProduct: Product = await getSingleProduct(params.id)
 
     console.log(singleProduct.options);
-    
-    
+
+
 
     return (
         <div className="flex h-screen items-center justify-center">
