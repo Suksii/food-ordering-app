@@ -26,7 +26,7 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
         <div className="flex h-screen items-center justify-center">
             <div className="h-screen w-full md:h-3/5 lg:w-2/3 xl:w-1/2 flex flex-col md:flex-row shadow-md">
                 <div className="relative h-full w-full" style={{ flex: 1 }}>
-                    <Image src={singleProduct?.image as string} alt={singleProduct?.categorySlug} fill className="object-cover" />
+                    {singleProduct.image && <Image src={singleProduct?.image} alt={singleProduct?.categorySlug} fill className="object-cover" />}
                     <div className="absolute top-0 bg-black bg-opacity-20 h-full w-full"></div>
                 </div>
                 <div className="flex flex-col justify-center w-full h-full" style={{ flex: 1 }}>
@@ -35,9 +35,7 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
                         <p className="text-gray-500 py-4">{singleProduct.description}</p>
                     </div>
                     <div className="flex justify-between items-center w-full px-4">
-                        <ProductDetails price={Number(singleProduct.price)}
-                            id={singleProduct.id}
-                            options={singleProduct?.options}
+                        <ProductDetails product={singleProduct}
                         />
                     </div>
                 </div>
