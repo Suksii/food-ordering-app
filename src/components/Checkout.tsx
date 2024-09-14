@@ -14,8 +14,8 @@ const Checkout = () => {
     const delivery = totalPrice === 0 ? 0 : 3;
     const tax = 0;
     const discountPercentage = 15;
-    
-     const discountPrice: number = discountPercentage / 100 * totalPrice;
+
+    const discountPrice: number = discountPercentage / 100 * totalPrice;
 
 
     return (

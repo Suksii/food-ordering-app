@@ -40,7 +40,7 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
                         />
                     </div>
                 </div>
-            <DeleteButton id={singleProduct.id}/>
+                <DeleteButton id={singleProduct.id} />
             </div>
         </div>
     );
