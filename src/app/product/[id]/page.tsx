@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Image from "next/image";
 import ProductDetails from "@/components/ProductDetails";
 import { Product } from '@/types/types';
+import DeleteButton from '@/components/DeleteButton';
 
 const getSingleProduct = async (id: string) => {
     const response = await fetch(`http://localhost:3000/api/products/${id}`, {
@@ -24,7 +25,7 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
 
     return (
         <div className="flex h-screen items-center justify-center">
-            <div className="h-screen w-full md:h-3/5 lg:w-2/3 xl:w-1/2 flex flex-col md:flex-row shadow-md">
+            <div className="h-screen w-full md:h-3/5 lg:w-2/3 xl:w-1/2 flex flex-col md:flex-row shadow-md relative">
                 <div className="relative h-full w-full" style={{ flex: 1 }}>
                     {singleProduct.image && <Image src={singleProduct?.image} alt={singleProduct?.categorySlug} fill className="object-cover" />}
                     <div className="absolute top-0 bg-black bg-opacity-20 h-full w-full"></div>
@@ -39,6 +40,7 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
                         />
                     </div>
                 </div>
+            <DeleteButton id={singleProduct.id}/>
             </div>
         </div>
     );
