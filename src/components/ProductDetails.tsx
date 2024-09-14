@@ -15,7 +15,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
     const [totalPrice, setTotalPrice] = useState<number>(product.price);
 
     const selectedOption = product.options && product.options?.find(option => option.name === selectedSize)
-    const singlePrice = product.price + (selectedOption ? selectedOption?.additionalPrice : product.price)
+    const singlePrice = Number(product.price) + (selectedOption ? selectedOption?.additionalPrice : product.price)
 
     useEffect(() => {
         useCartStore.persist.rehydrate()
