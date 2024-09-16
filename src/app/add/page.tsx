@@ -1,13 +1,14 @@
 "use client"
 
 import { useAddProduct } from "@/hooks/useAddProduct";
-import { error } from "console";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const AddProduct = () => {
 
-    const { imageRef, inputs, option, options, setOptions, handleImageUpload, handleChange, handleChangeOption } = useAddProduct()
+    const { imageRef, inputs, option, options, setOptions, handleChangeImage, handleImageUpload, handleChange, handleChangeOption, handleUpload, image } = useAddProduct()
 
     const { data: session, status } = useSession()
     const router = useRouter();
@@ -22,15 +23,18 @@ const AddProduct = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const url = await handleUpload();
         try {
             const response = await fetch("http://localhost:3000/api/products", {
                 method: "POST",
                 body: JSON.stringify({
+                    image: url,
                     ...inputs,
                     options
                 })
             })
             const data = await response.json()
+            toast.success("Product added successfully!")
             router.push(`/product/${data.id}`)
             
         } catch (error){
@@ -43,11 +47,12 @@ const AddProduct = () => {
             <div className="flex justify-center flex-col w-full md:w-[800px] px-10 mt-10 md:shadow-xl shadow-black">
                 <h1 className="text-2xl font-semibold text-center py-4">Add new product</h1>
                 <form className="flex flex-col flex-wrap gap-2 w-full" onSubmit={handleSubmit}>
-                    <div className="flex flex-col justify-center items-center gap-2">
-                        <div className="bg-gray-100 h-[150px] w-[150px]">
+                    <div className="flex flex-col justify-center items-center">
+                        <div className="h-[150px] w-[150px] relative">
+                            {image ? <Image src={`/${image?.name}`} alt="image" fill className="object-cover"/> : <div className="flex items-center justify-center h-full ring-1">No Image</div>}
                         </div>
                         <div className="text-center bg-gray-800 text-gray-100 font-semibold py-2 uppercase hover:bg-gray-700 duration-300 w-[150px] cursor-pointer" onClick={handleImageUpload}>
-                            <input type="file" className="hidden" ref={imageRef} />
+                            <input type="file" className="hidden" ref={imageRef} onChange={handleChangeImage}/>
                             <p>Upload Image</p>
                         </div>
                     </div>
