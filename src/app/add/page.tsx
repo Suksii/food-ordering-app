@@ -1,49 +1,10 @@
 "use client"
 
-import { useRef, useState } from "react"
-
-type Option = {
-    optionName: string,
-    additionalPrice: number
-}
-type Inputs = {
-    name: string,
-    description: string,
-    price: number,
-    categorySlug: string,
-}
+import { useAddProduct } from "@/hooks/useAddProduct";
 
 const AddProduct = () => {
 
-    const imageRef = useRef<HTMLInputElement | null>(null);
-    const [inputs, setInputs] = useState<Inputs>({
-        name: "",
-        description: "",
-        price: 0,
-        categorySlug: ""
-    });
-    const [option, setOption] = useState<Option>({
-        optionName: "",
-        additionalPrice: 0,
-    });
-    const [options, setOptions] = useState<Option[]>([]);
-
-    const handleImageUpload = () => {
-        if (imageRef.current) {
-            imageRef.current.click();
-        }
-    }
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setInputs(prevState => {
-            return { ...prevState, [e.target.name]: e.target.value }
-        })
-    }
-    const handleChangeOption = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setOption(prevState => {
-            return { ...prevState, [e.target.name]: e.target.value }
-        })
-    }
+    const {imageRef, inputs, option, options, setOptions,handleImageUpload, handleChange, handleChangeOption} = useAddProduct()
 
     return (
         <div className="min-h-screen flex justify-center items-center flex-col">
@@ -106,7 +67,7 @@ const AddProduct = () => {
                             />
                         </div>
                         <div className="flex justify-between mt-2 flex-wrap gap-2">
-                            <button type="button" className="text-center bg-gray-800 text-gray-100 px-4 py-2 font-semibold uppercase hover:bg-gray-700 duration-300 cursor-pointer" onClick={() => setOptions(prevState => [...prevState, option])} disabled={options.some(opt => opt.optionName ===option.optionName)}>Add option</button>
+                            <div className={`text-center bg-gray-800 text-gray-100 px-4 py-2 font-semibold uppercase hover:bg-gray-700 duration-300 cursor-pointer ${options.some(opt => opt.optionName === option.optionName) ? 'cursor-not-allowed opacity-50' : ''}`} onClick={() => !options.some(opt => opt.optionName === option.optionName) && setOptions(prevState => [...prevState, option])}>Add option</div>
                             <div className="flex flex-wrap gap-2">
                                 {options.map(option => (
                                     <div className="px-4 ring-1 ring-gray-800 flex items-center text-gray-800 gap-1 relative"
