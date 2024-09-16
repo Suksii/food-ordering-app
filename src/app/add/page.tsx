@@ -23,7 +23,7 @@ const AddProduct = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await fetch("https://localhost:3000/api/products", {
+            const response = await fetch("http://localhost:3000/api/products", {
                 method: "POST",
                 body: JSON.stringify({
                     ...inputs,
@@ -31,8 +31,8 @@ const AddProduct = () => {
                 })
             })
             const data = await response.json()
-
             router.push(`/product/${data.id}`)
+            
         } catch (error){
             console.log(error);
         }
@@ -79,7 +79,7 @@ const AddProduct = () => {
                         <label htmlFor="">Category</label>
                         <input placeholder="Type category..."
                             className="shadow-sm shadow-black font-bold px-1 py-2 w-full focus:outline-none"
-                            name="category"
+                            name="categorySlug"
                             onChange={handleChange}
                         />
                     </div>
@@ -88,7 +88,7 @@ const AddProduct = () => {
                         <div className="flex gap-2">
                             <input placeholder="Type name..."
                                 className="shadow-sm shadow-black font-bold px-1 py-2 w-full focus:outline-none"
-                                name="optionName"
+                                name="name"
                                 onChange={handleChangeOption}
                             />
                             <input type="number"
@@ -99,16 +99,16 @@ const AddProduct = () => {
                             />
                         </div>
                         <div className="flex justify-between mt-2 flex-wrap gap-2">
-                            <div className={`text-center bg-gray-800 text-gray-100 px-4 py-2 font-semibold uppercase hover:bg-gray-700 duration-300 cursor-pointer ${options.some(opt => opt.optionName === option.optionName) ? 'cursor-not-allowed opacity-50' : ''}`} onClick={() => !options.some(opt => opt.optionName === option.optionName) && setOptions(prevState => [...prevState, option])}>Add option</div>
+                            <div className={`text-center bg-gray-800 text-gray-100 px-4 py-2 font-semibold uppercase hover:bg-gray-700 duration-300 cursor-pointer ${options.some(opt => opt.name === option.name) ? 'cursor-not-allowed opacity-50' : ''}`} onClick={() => !options.some(opt => opt.name === option.name) && setOptions(prevState => [...prevState, option])}>Add option</div>
                             <div className="flex flex-wrap gap-2">
                                 {options.map(option => (
                                     <div className="px-4 ring-1 ring-gray-800 flex items-center text-gray-800 gap-1 relative"
-                                        key={option.optionName}
+                                        key={option.name}
                                     >
-                                        <p>{option.optionName}</p>
+                                        <p>{option.name}</p>
                                         <p>-</p>
                                         <p>${option.additionalPrice}</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 bg-red-600 p-0.5 text-red-50 rounded-full cursor-pointer font-bold absolute top-0 right-0 translate-x-1/2 -translate-y-1/2" onClick={() => setOptions(options.filter(item => (item.optionName !== option.optionName) || (item.optionName !== option.optionName)))}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 bg-red-600 p-0.5 text-red-50 rounded-full cursor-pointer font-bold absolute top-0 right-0 translate-x-1/2 -translate-y-1/2" onClick={() => setOptions(options.filter(item => (item.name !== option.name) || (item.name !== option.name)))}>
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                                         </svg>
                                     </div>
