@@ -1,16 +1,48 @@
 "use client"
 
 import { useAddProduct } from "@/hooks/useAddProduct";
+import { error } from "console";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const AddProduct = () => {
 
-    const {imageRef, inputs, option, options, setOptions,handleImageUpload, handleChange, handleChangeOption} = useAddProduct()
+    const { imageRef, inputs, option, options, setOptions, handleImageUpload, handleChange, handleChangeOption } = useAddProduct()
+
+    const { data: session, status } = useSession()
+    const router = useRouter();
+
+    if (status === "loading") {
+        return <p>Loading...</p>
+    }
+
+    if (status === "unauthenticated" || !session?.user.isAdmin) {
+        router.push("/")
+    }
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const response = await fetch("https://localhost:3000/api/products", {
+                method: "POST",
+                body: JSON.stringify({
+                    ...inputs,
+                    options
+                })
+            })
+            const data = await response.json()
+
+            router.push(`/product/${data.id}`)
+        } catch (error){
+            console.log(error);
+        }
+    }
 
     return (
         <div className="min-h-screen flex justify-center items-center flex-col">
             <div className="flex justify-center flex-col w-full md:w-[800px] px-10 mt-10 md:shadow-xl shadow-black">
                 <h1 className="text-2xl font-semibold text-center py-4">Add new product</h1>
-                <form className="flex flex-col flex-wrap gap-2 w-full">
+                <form className="flex flex-col flex-wrap gap-2 w-full" onSubmit={handleSubmit}>
                     <div className="flex flex-col justify-center items-center gap-2">
                         <div className="bg-gray-100 h-[150px] w-[150px]">
                         </div>
