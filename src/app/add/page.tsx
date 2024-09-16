@@ -98,7 +98,7 @@ const AddProduct = () => {
                                 name="optionName"
                                 onChange={handleChangeOption}
                             />
-                            <input type="number" 
+                            <input type="number"
                                 placeholder="Type additional price..."
                                 className="shadow-sm shadow-black font-bold px-1 py-2 w-full focus:outline-none"
                                 name="additionalPrice"
@@ -106,15 +106,20 @@ const AddProduct = () => {
                             />
                         </div>
                         <div className="flex justify-between mt-2 flex-wrap gap-2">
-                            <div className="text-center bg-gray-800 text-gray-100 px-4 py-2 font-semibold uppercase hover:bg-gray-700 duration-300 cursor-pointer" onClick={() => setOptions(prevState => [...prevState, option])}>Add option</div>
+                            <button type="button" className="text-center bg-gray-800 text-gray-100 px-4 py-2 font-semibold uppercase hover:bg-gray-700 duration-300 cursor-pointer" onClick={() => setOptions(prevState => [...prevState, option])} disabled={options.some(opt => opt.optionName ===option.optionName)}>Add option</button>
                             <div className="flex flex-wrap gap-2">
-                            {options.map(option => (
-                                <div className="px-4 ring-1 ring-gray-800 flex items-center text-gray-800 gap-1" key={option.optionName}>
-                                    <p>{option.optionName}</p>
-                                    <p>-</p>
-                                    <p>${option.additionalPrice}</p>
-                                </div>
-                            ))}
+                                {options.map(option => (
+                                    <div className="px-4 ring-1 ring-gray-800 flex items-center text-gray-800 gap-1 relative"
+                                        key={option.optionName}
+                                    >
+                                        <p>{option.optionName}</p>
+                                        <p>-</p>
+                                        <p>${option.additionalPrice}</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 bg-red-600 p-0.5 text-red-50 rounded-full cursor-pointer font-bold absolute top-0 right-0 translate-x-1/2 -translate-y-1/2" onClick={() => setOptions(options.filter(item => (item.optionName !== option.optionName) || (item.optionName !== option.optionName)))}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                        </svg>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
