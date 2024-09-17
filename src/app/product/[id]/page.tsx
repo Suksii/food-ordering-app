@@ -36,7 +36,7 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
                         <p className="text-gray-500 py-4">{singleProduct.description}</p>
                     </div>
                     <div className="flex justify-between items-center w-full px-4">
-                        <ProductDetails product={singleProduct}
+                        <ProductDetails product={{...singleProduct, price: Number(singleProduct.price)}}
                         />
                     </div>
                 </div>

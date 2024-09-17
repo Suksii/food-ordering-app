@@ -31,15 +31,15 @@ const CategoryPage = async ({params}:Props) => {
                             {item.image && <Image src={item?.image} alt={item.name} width={300} height={200} className="object-cover h-[200px] w-full"/>}
                             <div className="absolute top-0 bg-black bg-opacity-20 h-full w-full"></div>
                         </div>
-                        <div className="flex flex-col justify-center w-full h-full" style={{flex: 1}}>
-                            <div className="flex flex-col items-center justify-center w-full p-4">
+                        <div className="flex flex-col justify-between w-full min-h-[300px]" style={{flex: 1}}>
+                            <div className="flex flex-col items-center w-full p-4 h-full">
                                 <h1 className="text-2xl font-bold">{item.name}</h1>
                                 <p className="text-gray-500 py-4">{item.description}</p>
                             </div>
                             <div className="flex justify-between items-center w-full px-4">
                                 <p className="text-xl font-bold">${item.price}</p>
                             </div>
-                                <Link href={`../product/${item.id}`} className="w-full text-center bg-gray-800 text-gray-100 text-xl font-bold px-4 py-2 uppercase hover:bg-gray-700 duration-300">See details</Link>
+                                <Link href={`../product/${item.id}`} className="w-full text-center bg-gray-800 text-gray-100 text-xl font-bold px-4 py-2 mb-2 uppercase hover:bg-gray-700 duration-300">See details</Link>
                         </div>
                     </div>
                 </div>

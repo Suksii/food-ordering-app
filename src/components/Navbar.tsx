@@ -19,9 +19,9 @@ const Navbar = () => {
     return (
         <>
             <div className="fixed w-full z-20">
-                <div className="relative hidden md:block w-[80%] mx-auto drop-shadow-2xl py-6 px-10 bg-white">
+                <div className="relative hidden md:block w-full lg:w-[80%] mx-auto drop-shadow-2xl py-6 px-10 bg-white">
                     <div className="flex justify-between">
-                        <h1 className="text-2xl font-bold">Logo</h1>
+                        <h1 className="text-2xl font-bold lowercase">Gloovoo</h1>
                         <div className="flex space-x-12 items-center">
                             {navMenu.map((menu, index) => (
                                 <Link href={menu.href} key={index}>
@@ -38,7 +38,7 @@ const Navbar = () => {
                 <div className="md:hidden flex justify-between w-full shadow py-2 px-2">
                     <div className="flex justify-between items-center w-full">
                         <div className="z-50">
-                            <h1 className="text-2xl text-black font-bold">Logo</h1>
+                            <h1 className="text-2xl text-black font-bold lowercase">Gloovoo</h1>
                         </div>
                         <div className="z-20 text-black">
                             <Hamburger size={26} toggled={isOpened} toggle={setIsOpened} />

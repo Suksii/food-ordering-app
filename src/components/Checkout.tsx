@@ -11,7 +11,7 @@ const Checkout = () => {
         useCartStore.persist.rehydrate()
     }, [])
 
-    const delivery = totalPrice === 0 ? 0 : 3;
+    const delivery = totalPrice > 11 || totalItems === 0 ? 0 : 3;
     const tax = 0;
     const discountPercentage = 15;
 
