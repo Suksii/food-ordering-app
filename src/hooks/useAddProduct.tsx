@@ -1,5 +1,5 @@
 
-import { ChangeEventHandler, useRef, useState } from "react"
+import { useRef, useState } from "react"
 
 type Option = {
     name: string,

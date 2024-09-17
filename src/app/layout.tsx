@@ -15,11 +15,13 @@ export const metadata: Metadata = {
   description: "Best food",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -28,7 +30,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
-            <ToastContainer position="top-center" theme="dark"/>
+            <ToastContainer position="top-center" theme="dark" />
           </QueryProvider>
         </AuthProvider>
       </body>
