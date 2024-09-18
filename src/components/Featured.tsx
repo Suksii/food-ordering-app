@@ -18,7 +18,7 @@ const Featured = async () => {
     const featured:Product[] = await getFeatured();
 
      return (
-         <>
+         <div className='font-inria'>
             <h1 className="text-4xl font-bold text-center py-10">Check out our featured products</h1>
             <div className="w-full md:w-[80%] mx-auto overflow-x-scroll py-10 scroll">
                 <div className="w-max flex space-x-4">
@@ -36,7 +36,7 @@ const Featured = async () => {
                 ))}
                 </div>
             </div>
-         </>
+         </div>
         );
 };
 

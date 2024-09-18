@@ -24,7 +24,7 @@ const LoginPage = () => {
                     <Image src={"/shrimp.jpg"} alt={"Shrimp"} fill className="object-cover"/>
                     <div className="absolute top-0 bg-black bg-opacity-20 h-full w-full"></div>
                 </div>
-                <div className="flex flex-col items-center justify-center w-full h-full" style={{flex: 1}}>
+                <div className="flex flex-col items-center justify-center w-full h-full font-inria" style={{flex: 1}}>
                     <div className="text-center">
                         <h1 className="text-4xl font-bold">Login</h1>
                         <p className="text-gray-500 py-4">Login using your google or facebook account</p>

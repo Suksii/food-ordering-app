@@ -5,7 +5,7 @@ import Link from 'next/link';
 const DailyOffer = () => {
 
     return (
-        <div className={`bg-black text-white py-8 my-6`}>
+        <div className={`bg-black text-white py-8 my-6 font-inria`}>
             <div className="w-full md:w-[80%] flex flex-col md:flex-row mx-auto">
                 <div style={{flex: 1}} className="flex flex-col md:items-start items-center justify-center px-2 py-10">
                     <h1 className={`text-3xl font-bold`}>Try this out</h1>

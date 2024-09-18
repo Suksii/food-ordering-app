@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 const WelcomeSection = () => {
     return (
-        <div className="relative z-0 h-[500px] md:h-[700px] w-full">
+        <div className="relative z-0 h-[500px] md:h-[700px] w-full font-inria">
             <div style={{backgroundImage: "url('/pancakes.jpg')"}} className="bg-fixed absolute top-0 h-[500px] md:h-[700px] w-full bg-cover bg-center z-0"></div>
             <div className="absolute top-0 bg-black bg-opacity-60 h-[500px] md:h-[700px] w-full z-10"></div>
             <div className="relative flex flex-col items-center justify-center h-[500px] md:h-[700px] w-full top-0 z-20">

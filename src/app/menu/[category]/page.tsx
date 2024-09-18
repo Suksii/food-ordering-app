@@ -23,7 +23,7 @@ const CategoryPage = async ({params}:Props) => {
     const products:Product[] = await getProducts(params.category);
 
     return (
-        <div className="w-[80%] mx-auto flex flex-wrap gap-4 justify-center items-center min-h-screen pt-40">
+        <div className="w-[80%] mx-auto flex flex-wrap gap-4 justify-center items-center min-h-screen pt-40 font-inria">
             {products.map((item, index) => (
                 <div key={index} className="flex items-center justify-center">
                     <div className="w-[300px] flex flex-col shadow-md">

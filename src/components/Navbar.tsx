@@ -6,6 +6,7 @@ import Link from "next/link";
 import CartIcon from "@/components/CartIcon";
 import { UserLinksMobile, UserLinks } from './UserLinks';
 
+
 const Navbar = () => {
 
     const navMenu = [
@@ -18,11 +19,11 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="fixed w-full z-20">
+            <div className={`fixed w-full z-20`}>
                 <div className="relative hidden md:block w-full lg:w-[80%] mx-auto drop-shadow-2xl py-6 px-10 bg-white">
                     <div className="flex justify-between">
-                        <h1 className="text-2xl font-bold lowercase">Gloovoo</h1>
-                        <div className="flex space-x-12 items-center">
+                        <h1 className={`text-2xl font-bold lowercase font-sofadi`}>Gloovoo</h1>
+                        <div className="flex space-x-12 items-center font-inria">
                             {navMenu.map((menu, index) => (
                                 <Link href={menu.href} key={index}>
                                     <p>{menu.name}</p>
@@ -38,7 +39,7 @@ const Navbar = () => {
                 <div className="md:hidden flex justify-between w-full shadow py-2 px-2">
                     <div className="flex justify-between items-center w-full">
                         <div className="z-50">
-                            <h1 className="text-2xl text-black font-bold lowercase">Gloovoo</h1>
+                            <h1 className="text-2xl text-black font-bold font-sofadi lowercase">Gloovoo</h1>
                         </div>
                         <div className="z-20 text-black">
                             <Hamburger size={26} toggled={isOpened} toggle={setIsOpened} />
@@ -46,7 +47,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className={`absolute md:hidden  w-full bg-white shadow py-2 px-2 ${isOpened ? 'translate-y-0 opacity-100' : '-translate-y-[80vh] opacity-0'} duration-300`}>
-                    <div className="flex flex-col items-center justify-center z-10">
+                    <div className="flex flex-col items-center justify-center z-10 font-inria">
                         {navMenu.map((menu, index) => (
                             <Link href={menu.href} key={index} className="w-full text-center" onClick={() => setIsOpened(false)}>
                                 <p className="text-xl py-6 w-full hover:bg-gray-800 hover:text-white cursor-pointer duration-300">{menu.name}</p>

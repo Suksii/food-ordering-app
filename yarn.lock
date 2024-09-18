@@ -126,6 +126,11 @@
   dependencies:
     glob "10.3.10"
 
+"@next/font@^14.2.12":
+  version "14.2.12"
+  resolved "https://registry.npmjs.org/@next/font/-/font-14.2.12.tgz"
+  integrity sha512-9Ykl8a87enJTPFVtBy5Fpg7uqt0FSW+BJRhb4eeoVsdZjazEggpKsnD4Vf3y8exLcuRXd9Co6C99eiuEgeBWtg==
+
 "@next/swc-win32-x64-msvc@14.2.6":
   version "14.2.6"
   resolved "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-14.2.6.tgz"
@@ -1894,7 +1899,7 @@ next-auth@^4, next-auth@^4.24.7:
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
 
-"next@^12.2.5 || ^13 || ^14", next@14.2.6:
+next@*, "next@^12.2.5 || ^13 || ^14", next@14.2.6:
   version "14.2.6"
   resolved "https://registry.npmjs.org/next/-/next-14.2.6.tgz"
   integrity sha512-57Su7RqXs5CBKKKOagt8gPhMM3CpjgbeQhrtei2KLAA1vTNm7jfKS+uDARkSW8ZETUflDCBIsUKGSyQdRs4U4g==

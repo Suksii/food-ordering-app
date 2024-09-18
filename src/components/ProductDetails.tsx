@@ -41,12 +41,15 @@ const ProductDetails = ({ product }: { product: Product }) => {
         <div className="w-full">
             <h2 className="text-xl font-bold pb-4">Price: ${singlePrice}</h2>
             <div className="flex flex-col">
-                <h3 className="text-lg font-semibold">Size</h3>
-                <div className="flex gap-2 py-2">
-                    {product.options?.length && product.options?.map((size, index) => (
-                        <button key={index} onClick={() => setSelectedSize(size.name)} className={`bg-gray-100 text-xl font-bold px-4 py-2 uppercase hover:bg-gray-800 hover:text-gray-100  duration-300 ${selectedSize === size.name ? "bg-gray-800 text-gray-100" : "text-gray-900"}`}>{size.name}</button>
-                    ))}
-                </div>
+                {product.options && product.options?.length > 0 && (
+                    <>
+                        <h3 className="text-lg font-semibold">Size</h3>
+                        <div className="flex gap-2 py-2">
+                            {product.options?.map((size, index) => (
+                                <button key={index} onClick={() => setSelectedSize(size.name)} className={`bg-gray-100 text-xl font-bold px-4 py-2 uppercase hover:bg-gray-800 hover:text-gray-100  duration-300 ${selectedSize === size.name ? "bg-gray-800 text-gray-100" : "text-gray-900"}`}>{size.name}</button>
+                            ))}
+                        </div>
+                    </>)}
             </div>
             <div className="flex flex-col py-2">
             </div>

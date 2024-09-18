@@ -52,7 +52,7 @@ const OrdersPage = () => {
     if (isLoading || status === "loading") return "Loading..."
 
     return (
-        <div className="flex min-h-screen justify-center items-center">
+        <div className="flex min-h-screen justify-center items-center font-inria">
             <div className="w-full md:w-[90%] lg:w-[80%] xl:w-[70%]">
                 <table className="w-full border-separate border-spacing-1">
                     <thead className="bg-gray-600 text-gray-100">

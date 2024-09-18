@@ -19,7 +19,7 @@ const Menu = async () => {
     const categories:Categories = await getCategories();
 
     return (
-        <div className="w-full md:w-[80%] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center items-center min-h-screen pt-32">
+        <div className="w-full md:w-[80%] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center items-center min-h-screen pt-32 font-inria">
             {categories?.map((item, index) => (
                 <Link href={`menu/${item.slug}`}
                       key={index}
