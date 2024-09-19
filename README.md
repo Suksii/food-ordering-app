@@ -20,6 +20,9 @@ Same as users +
 - **Database:** PostgreSQL, prisma
 - **Responsive Design**
 
+## Technical Details
+- **Technologies Used:** React hooks(use State, useRef, useEffect), custom hooks(AuthProvider, QueryProvider, useAddProduct)
+
 ## Pages
 
 ### Login Page
