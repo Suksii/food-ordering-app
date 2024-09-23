@@ -23,6 +23,8 @@ Same as users +
 ## Technical Details
 - **Technologies Used:** React hooks(use State, useRef, useEffect), custom hooks(AuthProvider, QueryProvider, useAddProduct)
 - **Database:** PostgreSQL
+- **Authenticaton:** Nextauth.js (Google and Facebook Provider)
+- **Data Fetching:** ReactQuery
 - **Global State Managment:** Zustang
 - **ORM (Object-Relational Mapping):** Prisma
 
