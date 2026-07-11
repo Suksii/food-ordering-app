@@ -14,7 +14,7 @@ const DailyOffer = () => {
                     <Link href={"/menu/pizzas"} className={`bg-white text-black text-xl font-bold px-4 py-2 my-6 uppercase hover:bg-gray-200 duration-300`}>Order Now</Link>
                 </div>
                 <div style={{flex: 1}} className="flex justify-center md:justify-end items-center px-2">
-                    <Image src={"/pizza.png"} alt={"Pizza"} width={500} height={500}/>
+                    <Image src={"/pizza.png"} alt={"Pizza"} width={500} height={500} sizes="(max-width: 768px) 100vw, 500px"/>
                 </div>
             </div>
         </div>

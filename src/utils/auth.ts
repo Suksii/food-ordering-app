@@ -1,49 +1,51 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions, getServerSession, User } from "next-auth";
-import Google from "next-auth/providers/google"
+import Google from "next-auth/providers/google";
 import { prisma } from "./connection";
 
 declare module "next-auth" {
   interface Session {
     user: User & {
-      isAdmin: Boolean
-    }
+      isAdmin: Boolean;
+    };
   }
 }
 declare module "next-auth/jwt" {
   interface JWT {
-      isAdmin: Boolean
+    isAdmin: Boolean;
   }
 }
 
-export const authOptions:NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
   },
   providers: [
     Google({
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
-    })
+    }),
   ],
   callbacks: {
-    async session({token, session}) {
-      if(token) {
-      session.user.isAdmin = token.isAdmin;
+    async session({ token, session }) {
+      if (token) {
+        session.user.isAdmin = token.isAdmin;
       }
       return session;
     },
-    async jwt({token}) {
-      const userInDb = await prisma.user.findUnique({
-        where:{
-          email: token.email!,
-        },
-      })
-      token.isAdmin = userInDb?.isAdmin!;
-      return token
-    }
-  }
-}
+    async jwt({ token, user }) {
+      if (user || token.isAdmin === undefined) {
+        const userInDb = await prisma.user.findUnique({
+          where: {
+            email: token.email!,
+          },
+        });
+        token.isAdmin = userInDb?.isAdmin ?? false;
+      }
+      return token;
+    },
+  },
+};
 
-export const getAuthSession = () => getServerSession(authOptions)
+export const getAuthSession = () => getServerSession(authOptions);

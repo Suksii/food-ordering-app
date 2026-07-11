@@ -1,22 +1,23 @@
 import React from 'react';
 import Image from"next/image";
-import {Product} from "@/types/types";
 import Link from 'next/link';
-import {getBaseUrl} from "@/utils/baseUrl";
+import {prisma} from "@/utils/connection";
 
 const getFeatured = async () => {
-    const response = await fetch(`${getBaseUrl()}/api/products`, {
-        cache: "no-store"
-    });
-    if(!response.ok) {
-        throw new Error("Error fetching featured products");
+    try {
+        const products = await prisma.product.findMany({
+            where: { isFeatured: true }
+        });
+        return products.map(product => ({ ...product, price: Number(product.price) }));
+    } catch (error) {
+        console.error("Error fetching featured products", error);
+        return [];
     }
-    return response.json();
 }
 
 const Featured = async () => {
 
-    const featured:Product[] = await getFeatured();
+    const featured = await getFeatured();
 
      return (
          <div className='font-inria'>
@@ -26,7 +27,7 @@ const Featured = async () => {
                 {featured.map((product, index) => (
                     <div className="w-screen md:w-[40vw] xl:w-[20vw] flex flex-col items-center justify-around pb-4 bg-gray-100 hover:bg-gray-200 transition-all duration-300" key={index}>
                         <div className="w-full relative h-64 flex justify-center items-center rounded-full">
-                            {product.image && <Image src={product?.image} alt={product.name} layout="fill" objectFit="cover"/>}
+                            {product.image && <Image src={product.image} alt={product.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1280px) 40vw, 20vw" className="object-cover"/>}
                         </div>
                         <div className="flex flex-col items-center justify-evenly">
                             <h2 className="text-xl font-semibold py-2 uppercase">{product.name}</h2>

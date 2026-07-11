@@ -1,17 +1,15 @@
 import React from 'react';
 import Image from "next/image";
-import {Product} from "@/types/types";
 import Link from "next/link"
-import {getBaseUrl} from "@/utils/baseUrl";
+import {prisma} from "@/utils/connection";
 
-const getProducts = async (category:string) => {
-    const response = await fetch(`${getBaseUrl()}/api/products?category=${encodeURIComponent(category)}`, {
-        cache: "no-store"
-    })
-    if(!response.ok) {
-        throw new Error("Error fetching products");
-    }
-    return response.json();
+export const revalidate = 60;
+
+const getProducts = async (category: string) => {
+    const products = await prisma.product.findMany({
+        where: { categorySlug: category }
+    });
+    return products.map(product => ({ ...product, price: Number(product.price) }));
 }
 
 type Props = {
@@ -21,7 +19,7 @@ type Props = {
 }
 const CategoryPage = async ({params}:Props) => {
 
-    const products:Product[] = await getProducts(params.category);
+    const products = await getProducts(params.category);
 
     return (
         <div className="w-[80%] mx-auto flex flex-wrap gap-4 justify-center items-center min-h-screen pt-40 font-inria">

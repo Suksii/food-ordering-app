@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import React from 'react';
 const WelcomeSection = () => {
     return (
         <div className="relative z-0 h-[500px] md:h-[700px] w-full font-inria">
-            <div style={{backgroundImage: "url('/pancakes.jpg')"}} className="bg-fixed absolute top-0 h-[500px] md:h-[700px] w-full bg-cover bg-center z-0"></div>
+            <Image src="/pancakes.jpg" alt="Pancakes" fill priority sizes="100vw" className="object-cover object-center z-0"/>
             <div className="absolute top-0 bg-black bg-opacity-60 h-[500px] md:h-[700px] w-full z-10"></div>
             <div className="relative flex flex-col items-center justify-center h-[500px] md:h-[700px] w-full top-0 z-20">
                 <h1 className="text-white text-4xl md:text-6xl font-bold">Welcome to our store</h1>
