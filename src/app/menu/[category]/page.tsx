@@ -6,10 +6,15 @@ import {prisma} from "@/utils/connection";
 export const revalidate = 60;
 
 const getProducts = async (category: string) => {
-    const products = await prisma.product.findMany({
-        where: { categorySlug: category }
-    });
-    return products.map(product => ({ ...product, price: Number(product.price) }));
+    try {
+        const products = await prisma.product.findMany({
+            where: { categorySlug: category }
+        });
+        return products.map(product => ({ ...product, price: Number(product.price) }));
+    } catch (error) {
+        console.error("Error fetching products", error);
+        return [];
+    }
 }
 
 type Props = {
@@ -20,6 +25,15 @@ type Props = {
 const CategoryPage = async ({params}:Props) => {
 
     const products = await getProducts(params.category);
+
+    if (products.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen gap-2 font-inria">
+                <h1 className="text-3xl font-bold">Nothing here yet</h1>
+                <p className="text-gray-500">We couldn&apos;t find any products in this category.</p>
+            </div>
+        )
+    }
 
     return (
         <div className="w-[80%] mx-auto flex flex-wrap gap-4 justify-center items-center min-h-screen pt-40 font-inria">
@@ -38,7 +52,7 @@ const CategoryPage = async ({params}:Props) => {
                             <div className="flex justify-between items-center w-full px-4">
                                 <p className="text-xl font-bold">${item.price}</p>
                             </div>
-                                <Link href={`../product/${item.id}`} className="w-full text-center bg-gray-800 text-gray-100 text-xl font-bold px-4 py-2 mb-2 uppercase hover:bg-gray-700 duration-300">See details</Link>
+                                <Link href={`../product/${item.id}`} className="w-full text-center bg-primary text-white text-xl font-bold px-4 py-2 mb-2 uppercase rounded-md hover:bg-primary-dark duration-300">See details</Link>
                         </div>
                     </div>
                 </div>

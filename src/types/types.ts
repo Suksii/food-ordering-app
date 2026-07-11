@@ -1,5 +1,5 @@
 type Category = {
-    id: number;
+    id: string;
     name: string;
     description?: string;
     image?: string;
@@ -25,7 +25,7 @@ export type Order = {
     products: Product[];
     status: string;
     createdAt: Date;
-    intent_id?: String;
+    intentId?: string;
 }
 
 export type CartItem = {

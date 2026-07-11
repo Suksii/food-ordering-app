@@ -18,6 +18,15 @@ const Menu = async () => {
 
     const categories = await getCategories();
 
+    if (categories.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen gap-2 font-inria">
+                <h1 className="text-3xl font-bold">Our menu is being prepared</h1>
+                <p className="text-gray-500">Please check back soon.</p>
+            </div>
+        )
+    }
+
     return (
         <div className="w-full md:w-[80%] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center items-center min-h-screen pt-32 font-inria">
             {categories.map((item, index) => (

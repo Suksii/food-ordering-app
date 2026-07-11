@@ -46,7 +46,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
                         <h3 className="text-lg font-semibold">Size</h3>
                         <div className="flex gap-2 py-2">
                             {product.options?.map((size, index) => (
-                                <button key={index} onClick={() => setSelectedSize(size.name)} className={`bg-gray-100 text-xl font-bold px-4 py-2 uppercase hover:bg-gray-800 hover:text-gray-100  duration-300 ${selectedSize === size.name ? "bg-gray-800 text-gray-100" : "text-gray-900"}`}>{size.name}</button>
+                                <button key={index} onClick={() => setSelectedSize(size.name)} className={`text-xl font-bold px-4 py-2 uppercase rounded-md duration-300 ${selectedSize === size.name ? "bg-primary text-white" : "bg-gray-100 text-gray-900 hover:bg-primary-50"}`}>{size.name}</button>
                             ))}
                         </div>
                     </>)}
@@ -79,7 +79,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
             <hr className="pt-2" />
             <p className="text-xl font-semibold pb-2 w-full">Total price: ${totalPrice}</p>
             <div className="w-full pb-4 md:pb-0">
-                <button className="w-full bg-gray-800 text-gray-100 text-xl font-bold px-4 py-2 uppercase hover:bg-gray-700 duration-300"
+                <button className="w-full bg-primary text-white text-xl font-bold px-4 py-2 uppercase rounded-md hover:bg-primary-dark duration-300"
                     onClick={handleAddCart}
                 >
                     Add to Cart

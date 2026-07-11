@@ -19,6 +19,8 @@ const Featured = async () => {
 
     const featured = await getFeatured();
 
+    if (featured.length === 0) return null;
+
      return (
          <div className='font-inria'>
             <h1 className="text-4xl font-bold text-center py-10">Check out our featured products</h1>
@@ -32,7 +34,7 @@ const Featured = async () => {
                         <div className="flex flex-col items-center justify-evenly">
                             <h2 className="text-xl font-semibold py-2 uppercase">{product.name}</h2>
                             <p className="text-sm text-gray-500 px-2">{product.description}</p>
-                            <Link href={`/product/${product.id}`} className="bg-gray-800 text-gray-100 text-xl font-bold px-4 py-2 mt-6 uppercase hover:bg-gray-700 duration-300">Order Now</Link>
+                            <Link href={`/product/${product.id}`} className="bg-primary text-white text-xl font-bold px-4 py-2 mt-6 uppercase rounded-md hover:bg-primary-dark duration-300">Order Now</Link>
                         </div>
                     </div>
                 ))}

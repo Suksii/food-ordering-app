@@ -84,8 +84,8 @@ const OrdersPage = () => {
                                 {session?.user.isAdmin ? (
                                     <td>
                                         <form className="flex flex-col md:flex-row items-center justify-center gap-1" onSubmit={(e) => handleUpdate(e, order.id)}>
-                                            <input placeholder={order.status} className="shadow-sm shadow-black font-bold px-1 py-2 md:w-fit w-full" />
-                                            <button className="bg-gray-800 text-gray-100 px-3 py-2 uppercase hover:bg-gray-700 duration-300 w-full md:w-fit">Save</button>
+                                            <input placeholder={order.status} className="border border-gray-300 rounded-md font-bold px-2 py-2 md:w-fit w-full focus:outline-none focus:border-primary" />
+                                            <button className="bg-primary text-white px-3 py-2 uppercase rounded-md hover:bg-primary-dark duration-300 w-full md:w-fit">Save</button>
                                         </form>
                                     </td>
                                 ) : (

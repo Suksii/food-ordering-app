@@ -42,7 +42,7 @@ const Checkout = () => {
                 <p className="font-semibold">Total</p>
                 <p className="font-semibold">${(totalPrice - discountPrice + delivery + tax).toFixed(2)}</p>
             </div>
-            <button className="bg-gray-800 text-gray-100 text-xl font-bold px-4 py-2 mt-6 uppercase hover:bg-gray-700 duration-300 rounded-b-md">Checkout</button>
+            <button disabled={totalItems === 0} className="bg-primary text-white text-xl font-bold px-4 py-2 mt-6 uppercase hover:bg-primary-dark duration-300 rounded-b-md disabled:bg-gray-300 disabled:cursor-not-allowed">Checkout</button>
         </div>
     );
 };

@@ -10,11 +10,11 @@ export const UserLinks = () => {
     return (
         <div>
             {status === "unauthenticated" ? (
-                <Link className="bg-gray-800 text-gray-100 text-xl px-4 py-2 uppercase hover:bg-gray-700 duration-300" href="/login">Login</Link>
+                <Link className="bg-primary text-white text-xl px-4 py-2 uppercase rounded-md hover:bg-primary-dark duration-300" href="/login">Login</Link>
             ) : (
                 <div className="flex space-x-12 items-center">
-                    <Link href="/orders">Orders</Link>
-                    <span className="bg-gray-800 text-gray-100 text-xl px-4 py-2 uppercase hover:bg-gray-700 duration-300 cursor-pointer" onClick={() => signOut()}>Logout</span>
+                    <Link href="/orders" className="hover:text-primary duration-300">Orders</Link>
+                    <span className="bg-primary text-white text-xl px-4 py-2 uppercase rounded-md hover:bg-primary-dark duration-300 cursor-pointer" onClick={() => signOut()}>Logout</span>
                 </div>
             )
             }
