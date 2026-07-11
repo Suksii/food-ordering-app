@@ -1,7 +1,7 @@
 "use client"
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Order, Product } from '@/types/types';
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
@@ -13,20 +13,22 @@ const OrdersPage = () => {
 
     const router = useRouter()
 
-    if (status === "unauthenticated")
-        router.push("/")
-
+    useEffect(() => {
+        if (status === "unauthenticated")
+            router.push("/")
+    }, [status, router])
 
     const { isLoading, error, data } = useQuery({
         queryKey: ['orders'],
-        queryFn: () => fetch('http://localhost:3000/api/orders').then(response => response.json())
+        queryFn: () => fetch('/api/orders').then(response => response.json()),
+        enabled: status === "authenticated"
     })
 
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
         mutationFn: ({ id, status }: { id: string, status: string }) => {
-            return fetch(`http://localhost:3000/api/orders/${id}`, {
+            return fetch(`/api/orders/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -49,7 +51,9 @@ const OrdersPage = () => {
         mutation.mutate({ id, status })
     }
 
-    if (isLoading || status === "loading") return "Loading..."
+    if (isLoading || status !== "authenticated") return "Loading..."
+
+    const orders: Order[] = Array.isArray(data) ? data : [];
 
     return (
         <div className="flex min-h-screen justify-center items-center font-inria">
@@ -66,15 +70,15 @@ const OrdersPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((order: Order) => (
+                        {orders.map((order: Order) => (
                             <tr key={order.id} className="text-left odd:bg-gray-100">
                                 <td className="hidden lg:block py-6 px-2">{order.id}</td>
                                 <td className="py-6 px-2">{new Date(order.createdAt).toLocaleDateString('en-GB').replaceAll("/", ".")}</td>
                                 <td className="py-6 px-2">{order.userEmail}</td>
                                 <td className="py-6 px-2">{order.total} euros</td>
                                 <td className="hidden md:block py-6 px-2">
-                                    {order.products.map((product: Product) => (
-                                        <p>{product.name}</p>
+                                    {order.products.map((product: Product, index) => (
+                                        <p key={index}>{product.name}</p>
                                     ))}
                                 </td>
                                 {session?.user.isAdmin ? (

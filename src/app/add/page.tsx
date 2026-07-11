@@ -4,6 +4,7 @@ import { useAddProduct } from "@/hooks/useAddProduct";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const AddProduct = () => {
@@ -13,19 +14,25 @@ const AddProduct = () => {
     const { data: session, status } = useSession()
     const router = useRouter();
 
+    useEffect(() => {
+        if (status === "unauthenticated" || (status === "authenticated" && !session?.user.isAdmin)) {
+            router.push("/")
+        }
+    }, [status, session, router])
+
     if (status === "loading") {
         return <p>Loading...</p>
     }
 
     if (status === "unauthenticated" || !session?.user.isAdmin) {
-        router.push("/")
+        return null;
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const url = await handleUpload();
         try {
-            const response = await fetch("http://localhost:3000/api/products", {
+            const url = await handleUpload();
+            const response = await fetch("/api/products", {
                 method: "POST",
                 body: JSON.stringify({
                     image: url,
@@ -34,11 +41,16 @@ const AddProduct = () => {
                 })
             })
             const data = await response.json()
+            if (!response.ok) {
+                toast.error(data.message || "Failed to add product!")
+                return;
+            }
             toast.success("Product added successfully!")
             router.push(`/product/${data.id}`)
-            
+
         } catch (error){
             console.log(error);
+            toast.error("Failed to add product!")
         }
     }
 

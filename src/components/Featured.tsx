@@ -2,9 +2,10 @@ import React from 'react';
 import Image from"next/image";
 import {Product} from "@/types/types";
 import Link from 'next/link';
+import {getBaseUrl} from "@/utils/baseUrl";
 
 const getFeatured = async () => {
-    const response = await fetch("http://localhost:3000/api/products", {
+    const response = await fetch(`${getBaseUrl()}/api/products`, {
         cache: "no-store"
     });
     if(!response.ok) {

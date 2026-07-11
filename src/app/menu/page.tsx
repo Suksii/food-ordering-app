@@ -1,11 +1,12 @@
 import React from 'react';
 import Link from "next/link";
 import {Categories} from "@/types/types";
+import {getBaseUrl} from "@/utils/baseUrl";
 
 const Menu = async () => {
 
     const getCategories = async () => {
-        const response = await fetch("http://localhost:3000/api/categories",{
+        const response = await fetch(`${getBaseUrl()}/api/categories`,{
             cache: "no-store"
         });
         const data = await response.json();

@@ -17,7 +17,7 @@ const DeleteButton = ({ id }: {id: string}) => {
     }
 
     const handleDelete = async () => {
-        const response = await fetch(`http://localhost:3000/api/products/${id}`,{
+        const response = await fetch(`/api/products/${id}`,{
             method: "DELETE",
         })
         const data = await response.json();

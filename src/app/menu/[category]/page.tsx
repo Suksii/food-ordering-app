@@ -2,9 +2,10 @@ import React from 'react';
 import Image from "next/image";
 import {Product} from "@/types/types";
 import Link from "next/link"
+import {getBaseUrl} from "@/utils/baseUrl";
 
 const getProducts = async (category:string) => {
-    const response = await fetch(`http://localhost:3000/api/products?category=${category}`, {
+    const response = await fetch(`${getBaseUrl()}/api/products?category=${encodeURIComponent(category)}`, {
         cache: "no-store"
     })
     if(!response.ok) {
